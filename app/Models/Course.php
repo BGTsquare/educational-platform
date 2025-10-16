@@ -6,6 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+        'price',
+        'youtube_embed_url',
+    ];
+
     // A course has many materials, enrollments, and payments.
     public function materials()
     {

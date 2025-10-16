@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         // Eager load the course data for efficiency
         $enrollments = Auth::user()->enrollments()->with('course')->get();
-        
+
         return view('student.dashboard', compact('enrollments'));
     }
 }

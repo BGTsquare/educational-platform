@@ -16,7 +16,7 @@
                     <div class="mt-6 text-3xl font-bold text-blue-500">
                         Price: {{ number_format($course->price, 2) }} ETB
                     </div>
-                    
+
                     {{-- Payment Logic --}}
                     <div class="mt-6">
                         <h4 class="font-semibold">Pay with Telebirr:</h4>

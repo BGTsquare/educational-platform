@@ -28,7 +28,7 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth', 'verified'])->prefix('student')->name('student.')->group(function () {
     // Student Dashboard - "My Courses"
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // View a specific course
     Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('courses.show');
 });
