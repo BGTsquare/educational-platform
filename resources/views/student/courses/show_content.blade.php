@@ -35,7 +35,8 @@
                             <ul class="list-disc list-inside mt-4 space-y-2">
                                 @foreach($course->materials as $material)
                                     <li>
-                                        <a href="#" class="text-blue-500 hover:underline">
+                                        {{-- This now generates a secure, temporary link --}}
+                                        <a href="{{ URL::signedRoute('student.materials.download', ['material' => $material->id]) }}" class="text-blue-500 hover:underline">
                                             {{ $material->file_name }}
                                         </a>
                                     </li>

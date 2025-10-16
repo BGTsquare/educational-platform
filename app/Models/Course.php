@@ -2,24 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory; // <-- ADD THIS LINE
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'title',
-        'slug',
-        'description',
-        'price',
-        'youtube_embed_url',
-    ];
+    use HasFactory; // <-- AND ADD THIS LINE
 
-    // A course has many materials, enrollments, and payments.
+    // Your existing relationship methods are below and are correct
     public function materials()
     {
         return $this->hasMany(Material::class);

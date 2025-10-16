@@ -5,14 +5,13 @@ use Illuminate\Support\Facades\Route;
 // Add these new imports
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\CourseController;
+use App\Http\Controllers\Public\HomeController; // <-- IMPORT THIS
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Public homepage route
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Note: Use the student dashboard controller for the authenticated /dashboard route
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -20,15 +19,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-
-// --- ADD THE FOLLOWING NEW ROUTES ---
+require __DIR__ . '/auth.php';
 
 // Route group for all student-facing pages, requires login
 Route::middleware(['auth', 'verified'])->prefix('student')->name('student.')->group(function () {
-    // Student Dashboard - "My Courses"
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    // This route is now redundant because '/dashboard' points to it. Keep for compatibility.
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
     // View a specific course
     Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('courses.show');
+
+    // Secure material download route (requires signed URL and auth)
+    Route::get('/materials/{material}/download', [CourseController::class, 'downloadMaterial'])
+        ->name('materials.download')
+        ->middleware('signed');
 });
