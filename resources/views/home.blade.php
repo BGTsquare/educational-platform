@@ -11,7 +11,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Our Courses</h2>
-            
+
             @if($courses->isEmpty())
                 <p class="text-center text-gray-500">No courses are available at the moment. Please check back later.</p>
             @else

@@ -25,7 +25,7 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth', 'verified'])->prefix('student')->name('student.')->group(function () {
     // This route is now redundant because '/dashboard' points to it. Keep for compatibility.
     // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // View a specific course
     Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('courses.show');
 

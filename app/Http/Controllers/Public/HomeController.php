@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         // Fetch all courses, ordered by the newest first
         $courses = Course::latest()->get();
-        
+
         return view('home', compact('courses'));
     }
 }
